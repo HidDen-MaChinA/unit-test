@@ -1,4 +1,4 @@
-import { render } from "@testing-library/react";
+import { fireEvent, queryByTestId, render } from "@testing-library/react";
 
 import { ListItem } from "../ListItem";
 
@@ -47,10 +47,33 @@ describe('ListItem', () => {
     });
     
     //TODO: implement this
-    it('callback is called', () => {});
+    it('callback is called', () => {
+        const { getByTestId , debug }=render(
+            <ListItem 
+                id ="list-item-1"
+                checkable={true}
+                onCheck={mockOnCheck}
+                item="Lorme ipesum dolor sit amet consectetur"
+            />
+        )
+        const component = getByTestId("test-list-item-1")
+        fireEvent.click(component);
+        expect(mockOnCheck).toBeCalled();
+    });
 
     //TODO: implement this
-    it('callback is not called when not checkable', () => {});
+    it('callback is not called when not checkable', () => {
+        const { queryByTestId , debug }=render(
+            <ListItem 
+                id ="list-item-1"
+                checkable={false}
+                onCheck={mockOnCheck}
+                item="Lorme ipesum dolor sit amet consectetur"
+            />
+        )
+        
+        expect(queryByTestId("test-list-item-1")).toBeNull()
+    });
 
     //TODO: implement this
     it('matches saved snapshot', () => {
