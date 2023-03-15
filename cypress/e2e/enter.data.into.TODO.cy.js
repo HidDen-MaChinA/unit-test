@@ -6,15 +6,14 @@ describe("for  App component e2e",()=>{
             cy.visit("http://localhost:3000/")
                 .get("#add-todo")
                 .type("hello{enter}");
-            cy.get("#hello-1").should("contain.text","hello")     
+            cy.get(".list-item").should("contain.text","hello")     
         })
          it("should pass value into todo when you click on the checkbox",()=>{
             cy.visit("http://localhost:3000/")
                 .get("#add-todo")
                 .type("another test{enter}");
-            
-            cy.get("#another test-1").click();
-            cy.get()
+                cy.get(".list-item").click();
+            cy.get("label").as("ht").should("contain.text","another test")
         })
     }
 )
